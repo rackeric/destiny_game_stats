@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+<h3>Daily Story Mission</h3>
+<div class="row">
+  {% for item in advisors.Response.data.dailyChapterHashes %}
+      <div class="col-md-4">
+        <img src="http://www.bungie.net{{ advisors.Response.definitions.activities.get(item.__str__()).pgcrImage }}" width="100%"><br>
+        <b>{{ advisors.Response.definitions.activities.get(item.__str__()).activityName }}</b>
+        Level {{ advisors.Response.definitions.activities.get(item.__str__()).activityLevel }}<br>
+        <i>{{ advisors.Response.definitions.activities.get(item.__str__()).activityDescription }}</i><br>
+        <br>
+      </div>
+    {% endfor %}
+</div>
+
+<h3>Prison of Elders</h3>
+<div class="row">
+    {% for item in advisors.Response.data.arena %}
+      <div class="col-md-4">
+        <img src="http://www.bungie.net{{ advisors.Response.definitions.activities.get(item.activityHash.__str__()).pgcrImage }}" width="100%"><br>
+        <b>{{ advisors.Response.definitions.activities.get(item.activityHash.__str__()).activityName }}</b>
+        Level {{ advisors.Response.definitions.activities.get(item.activityHash.__str__()).activityLevel }}<br>
+        <i>{{ advisors.Response.definitions.activities.get(item.activityHash.__str__()).activityDescription }}</i><br>
+        <br>
+      </div>
+    {% endfor %}
+</div>
+
+<hr>
+
+
+<br>
+<b>data:</b><br>
+{% for item in advisors.Response.data %}
+  {{ item }}<br>
+{% endfor %}
+
+<br>
+<b>definitions:</b><br>
+{% for item in advisors.Response.definitions %}
+  {{ item }}<br>
+{% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h1>{{ member.Response[0]['displayName'] }}
+<img src="http://www.bungie.net{{ member.Response[0]['iconPath'] }}"></h1>
+
+MemberID: {{ member.Response[0]['membershipId'] }}<br>
+Clan: {{ account.Response.data.clanName }}<br>
+ID: {{ account.Response.data.membershipId }}<br>
+Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
+
+
+{% for item in account.Response.data.inventory.currencies %}
+    {{ account.Response.definitions.get('items').get(item.itemHash.__str__()).itemName }}: {{ item.value }}<br>
+{% endfor %}
+
+<br>
+<hr>
+
+<div class="row">
+
+    {% for toon in account.Response.data.characters %}
+      <div class="col-md-4">
+
+       <div class="row">
+         <div class="col-md-3">
+           <img src="http://www.bungie.net{{ toon.emblemPath }}" class="img-responsive">
+         </div>
+         <div class="col-md-9">
+           <img src="http://www.bungie.net{{ toon.backgroundPath }}" class="img-responsive">
+         </div>
+       </div>
+
+       <br>
+       Base Level: {{ toon.baseCharacterLevel }}<br>
+       characterLevel: {{  toon.characterLevel }}<br>
+       light: {{ toon.characterBase.stats.STAT_LIGHT.value }}<br>
+       baseCharacterLevel: {{ toon.baseCharacterLevel }}<br>
+       minutesPlayedTotal: {{ toon.characterBase.minutesPlayedTotal }}<br>
+       classType: {{ toon.characterBase.classType }} (0=Titan, 1=Hunter, 2=Warlock)<br>
+       characterId: {{ toon.characterBase.characterId }}
+
+       <br><br>
+
+       {% for item in toon.characterBase.peerView.equipment %}
+        <img src="http://www.bungie.net{{ account.Response.definitions['items'].get(item.itemHash.__str__()).icon }}"><br>
+        <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemName }}</b><br>
+        <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemTypeName }}</b><br>
+        <i>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemDescription }}</i><br>
+
+        {{ account.Response.definitions['items'].get(item.itemHash.__str__()).get('primaryStat').value }}
+
+
+        {% for x in account.Response.data.inventory['items'] %}
+          {% if x.itemHash == item.itemHash %}
+            {{ x.itemHash }}:{{ item.itemHash }}
+            <h1>{{ x.get('primaryStat').value }}!!</h1>
+          {% endif %}
+        {% endfor %}
+       <br>
+       {% endfor %}
+
+      </div>
+    {% endfor %}
+
+</div>
+
+
+<style>
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+</style>
+
+{% endblock %}
