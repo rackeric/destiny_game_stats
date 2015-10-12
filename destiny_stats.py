@@ -33,9 +33,32 @@ def summary():
     acct_summary_url = 'http://www.bungie.net/Platform/Destiny/1/Account/' + member_id + '/Summary/?definitions=true'
     account = requests.get(acct_summary_url, headers=headers, cookies=cookies)
 
+    #  THIS TAKES FOREVER!!!
+    #  FIND A BETTER WAY!!!!
+    BUCKET_VAULT_WEAPONS = ''
+    BUCKET_VAULT_ARMOR = ''
+    BUCKET_VAULT_ITEMS = ''
+    #for bucket in account.json()['Response']['definitions']['buckets']:
+    #    if account.json()['Response']['definitions']['buckets'][bucket]['bucketIdentifier'] == "BUCKET_VAULT_WEAPONS":
+    #        BUCKET_VAULT_WEAPONS = bucket
+    #        print "hit 1"
+    #        print BUCKET_VAULT_WEAPONS
+    #    elif account.json()['Response']['definitions']['buckets'][bucket]['bucketIdentifier'] == "BUCKET_VAULT_ARMOR":
+    #        BUCKET_VAULT_ARMOR = bucket
+    #        print "hit 2"
+    #        print BUCKET_VAULT_ARMOR
+    #    elif account.json()['Response']['definitions']['buckets'][bucket]['bucketIdentifier'] == "BUCKET_VAULT_ITEMS":
+    #        BUCKET_VAULT_ITEMS = bucket
+    #        print "hit 3"
+    #        print BUCKET_VAULT_ITEMS
+
+
     return render_template('summary.html',
                            account=account.json(),
-                           member=member.json())
+                           member=member.json(),
+                           BUCKET_VAULT_WEAPONS = BUCKET_VAULT_WEAPONS,
+                           BUCKET_VAULT_ARMOR = BUCKET_VAULT_ARMOR,
+                           BUCKET_VAULT_ITEMS = BUCKET_VAULT_ITEMS)
 
 if __name__ == '__main__':
     app.run(debug=True)
