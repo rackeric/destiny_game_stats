@@ -7,13 +7,10 @@
 Clan: {{ account.Response.data.clanName }}<br>
 Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
 
-<br>
-
 {% for item in account.Response.data.inventory.currencies %}
-    <img src="http://www.bungie.net{{ account.Response.definitions.get('items').get(item.itemHash.__str__()).icon }}">  {{ account.Response.definitions.get('items').get(item.itemHash.__str__()).itemName }}: {{ item.value }}
+    <img src="http://www.bungie.net{{ account.Response.definitions.get('items').get(item.itemHash.__str__()).icon }}" alt="{{ account.Response.definitions.get('items').get(item.itemHash.__str__()).itemName }}" width="3%"> {{ item.value }}<br>
 {% endfor %}
 
-<br>
 <hr>
 
 <div class="row">
@@ -51,11 +48,10 @@ Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
        <br><br>
 
        {% for item in toon.characterBase.peerView.equipment %}
-        <img src="http://www.bungie.net{{ account.Response.definitions['items'].get(item.itemHash.__str__()).icon }}">
-        <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).get('stats').get(account.Response.definitions['items'][item.itemHash.__str__()].primaryBaseStatHash.__str__())['value'] }}</b>
-        <br>
+        <img src="http://www.bungie.net{{ account.Response.definitions['items'].get(item.itemHash.__str__()).icon }}"><br>
+        {{ account.Response.definitions['items'].get(item.itemHash.__str__()).get('stats').get(account.Response.definitions['items'][item.itemHash.__str__()].primaryBaseStatHash.__str__())['value'] }}
+        {{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemTypeName }}<br>
         <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemName }}</b><br>
-        <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemTypeName }}</b><br>
         <i>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemDescription }}</i><br>
 
         <br>
@@ -73,15 +69,15 @@ Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
 
 
 <div class="row">
-    {% for item in account.Response.definitions['items'] %}
+    {% for item in account.Response.data.inventory['items'] %}
 
               <div class="col-md-2">
-                <img src="http://www.bungie.net{{ account.Response.definitions['items'][item.__str__()].icon }}"><br>
-                {{ account.Response.definitions['items'][item.__str__()].get('stats').get(account.Response.definitions['items'][item.__str__()].primaryBaseStatHash.__str__())['value'] }}
-                {{ account.Response.definitions['items'][item.__str__()].itemTypeName }}<br>
-                <b>{{ account.Response.definitions['items'][item.__str__()].itemName }}</b><br>
-                <i>{{ account.Response.definitions['items'][item.__str__()].itemDescription }}</i><br>
-                {{ account.Response.definitions['items'][item.__str__()].bucketTypeHash }}<br>
+                <img src="http://www.bungie.net{{ account.Response.definitions['items'][item.itemHash.__str__()].icon }}"><br>
+                {{ account.Response.definitions['items'][item.itemHash.__str__()].get('stats').get(account.Response.definitions['items'][item.itemHash.__str__()].primaryBaseStatHash.__str__())['value'] }}
+                {{ account.Response.definitions['items'][item.itemHash.__str__()].itemTypeName }}<br>
+                <b>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemName }}</b><br>
+                <i>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemDescription }}</i><br>
+                {{ account.Response.definitions['items'][item.itemHash.__str__()].bucketTypeHash }}<br>
 
                 <br>
               </div>
