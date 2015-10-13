@@ -63,9 +63,7 @@ Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
 <br>
 <hr>
 
-<h3>Vault</h3>
-
-<h4>/ Weapons /</h4>
+<h3>/ Vault / Weapons /</h3>
 <div class="row">
     {% for item in account.Response.data.inventory['items'] %}
         {% if item.bucketHash.__str__() == BUCKET_VAULT_WEAPONS %}
