@@ -52,8 +52,6 @@ Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
         {{ account.Response.definitions['items'].get(item.itemHash.__str__()).get('stats').get(account.Response.definitions['items'][item.itemHash.__str__()].primaryBaseStatHash.__str__())['value'] }}
         {{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemTypeName }}<br>
         <b>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemName }}</b><br>
-        <i>{{ account.Response.definitions['items'].get(item.itemHash.__str__()).itemDescription }}</i><br>
-
         <br>
        {% endfor %}
 
@@ -67,31 +65,55 @@ Grimoire Score: {{ account.Response.data.grimoireScore }}<br>
 
 <h3>Vault</h3>
 
-
+<h4>/ Weapons /</h4>
 <div class="row">
     {% for item in account.Response.data.inventory['items'] %}
-
+        {% if item.bucketHash.__str__() == BUCKET_VAULT_WEAPONS %}
               <div class="col-md-2">
                 <img src="http://www.bungie.net{{ account.Response.definitions['items'][item.itemHash.__str__()].icon }}"><br>
-                {{ account.Response.definitions['items'][item.itemHash.__str__()].get('stats').get(account.Response.definitions['items'][item.itemHash.__str__()].primaryBaseStatHash.__str__())['value'] }}
+                {{ item.primaryStat.value }}
                 {{ account.Response.definitions['items'][item.itemHash.__str__()].itemTypeName }}<br>
                 <b>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemName }}</b><br>
                 <i>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemDescription }}</i><br>
-                {{ account.Response.definitions['items'][item.itemHash.__str__()].bucketTypeHash }}<br>
-
                 <br>
               </div>
-
+        {% endif %}
     {% endfor %}
 </div>
 
+<br>
 
+<h4>/ Armor /</h4>
+<div class="row">
+    {% for item in account.Response.data.inventory['items'] %}
+        {% if item.bucketHash.__str__() == BUCKET_VAULT_ARMOR %}
+              <div class="col-md-2">
+                <img src="http://www.bungie.net{{ account.Response.definitions['items'][item.itemHash.__str__()].icon }}"><br>
+                {{ item.primaryStat.value }}
+                {{ account.Response.definitions['items'][item.itemHash.__str__()].itemTypeName }}<br>
+                <b>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemName }}</b><br>
+                <i>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemDescription }}</i><br>
+                <br>
+              </div>
+        {% endif %}
+    {% endfor %}
+</div>
 
-<style>
-.no-gutter > [class*='col-'] {
-    padding-right:0;
-    padding-left:0;
-}
-</style>
+<br>
+
+<h4>/ Items /</h4>
+<div class="row">
+    {% for item in account.Response.data.inventory['items'] %}
+        {% if item.bucketHash.__str__() == BUCKET_VAULT_ITEMS %}
+              <div class="col-md-2">
+                <img src="http://www.bungie.net{{ account.Response.definitions['items'][item.itemHash.__str__()].icon }}"><br>
+                {{ account.Response.definitions['items'][item.itemHash.__str__()].itemTypeName }}<br>
+                <b>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemName }}</b><br>
+                <i>{{ account.Response.definitions['items'][item.itemHash.__str__()].itemDescription }}</i><br>
+                <br>
+              </div>
+        {% endif %}
+    {% endfor %}
+</div>
 
 {% endblock %}
